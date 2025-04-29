@@ -9,7 +9,7 @@ const useFindUsers = ({currentUser, searchKey}) => {
         const unsubscribe = firebase
             .firestore()
             .collection("users")
-            .where("username", "!=", currentUser.username)
+            .where("username", "!=", currentUser?.username)
             .onSnapshot((snapshot) => {
                 const data = snapshot.docs.map((doc, index) => ({id: index, ...doc.data()}));
                 setUsers(data);

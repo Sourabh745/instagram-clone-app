@@ -10,9 +10,9 @@ const useEditPostCaption = ({navigation, post}) => {
         await firebase
             .firestore()
             .collection("users")
-            .doc(post.owner_email)
+            .doc(post?.owner_email)
             .collection("posts")
-            .doc(post.id)
+            .doc(post?.id)
             .update({
             caption: value,
             });

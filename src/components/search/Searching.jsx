@@ -47,7 +47,7 @@ const Searching = ({ navigation, searchResult, currentUser }) => {
                   <Text style={styles.user}>{item.username}</Text>
                   <Text style={styles.name}>
                     {item.name}
-                    {item.followers.includes(currentUser.email) &&
+                    {item.followers.includes(currentUser?.email) &&
                       " • Following"}
                   </Text>
                 </View>

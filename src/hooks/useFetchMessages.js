@@ -10,7 +10,7 @@ const useFetchMessages = ({user, currentUser}) => {
         firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .collection("chat")
         .doc(user.email)
         .collection("messages")

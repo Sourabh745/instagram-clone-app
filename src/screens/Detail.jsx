@@ -36,7 +36,7 @@ const Detail = ({ navigation, route }) => {
   useEffect(() => {
     if (timeToReplaceData > 0) {
       const moveItemToStart = (arr) => {
-        const index = arr.findIndex((post) => item.id === post.id);
+        const index = arr.findIndex((post) => item.id === post?.id);
         if (index !== -1 || index !== 0) {
           const itemToMove = arr.splice(index, 1)[0];
           arr.unshift(itemToMove);

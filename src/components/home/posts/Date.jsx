@@ -8,7 +8,7 @@ const Date = ({ post }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {post.createdAt && timeAgoLong(post.createdAt.seconds)}
+        {post?.createdAt && timeAgoLong(post?.createdAt.seconds)}
       </Text>
     </View>
   );

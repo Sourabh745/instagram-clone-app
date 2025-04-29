@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useUserContext } from "../../contexts/UserContext";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import BottomSheetFollowing from "./bottomSheets/BottomSheetFollowing";
@@ -33,7 +33,7 @@ const SubHeader = ({ user, navigation, numberOfPosts }) => {
     <View style={styles.container}>
       <View style={styles.rowContainer}>
         <View style={styles.userContainer}>
-          {checkStoriesSeen(user.username, currentUser.email) ? (
+          {checkStoriesSeen(user.username, currentUser?.email) ? (
             <TouchableOpacity>
               <Image
                 source={{ uri: user.profile_picture }}
@@ -76,7 +76,7 @@ const SubHeader = ({ user, navigation, numberOfPosts }) => {
             style={styles.socialColumn}
           >
             <Text style={styles.socialBoldText}>
-              {user.followers && user.followers.length > 0
+              {user.followers && user.followers?.length > 0
                 ? user.followers.length
                 : 0}
             </Text>
@@ -104,7 +104,7 @@ const SubHeader = ({ user, navigation, numberOfPosts }) => {
       )}
 
       <View style={styles.btnContainers}>
-        {currentUser.following && currentUser.following.includes(user.email) ? (
+        {currentUser?.following && currentUser?.following.includes(user.email) ? (
           <TouchableOpacity
             onPress={() => handleFollowingModal()}
             style={styles.btnWrapper}
@@ -112,8 +112,8 @@ const SubHeader = ({ user, navigation, numberOfPosts }) => {
             <Text style={styles.btnText}>Following</Text>
             <MaterialIcons name="keyboard-arrow-down" size={22} color="#fff" />
           </TouchableOpacity>
-        ) : currentUser.following_request &&
-          currentUser.following_request.includes(user.email) ? (
+        ) : currentUser?.following_request &&
+          currentUser?.following_request.includes(user.email) ? (
           <TouchableOpacity
             onPress={() => handleFollow(user.email)}
             style={styles.btnWrapper}
@@ -153,7 +153,7 @@ const SubHeader = ({ user, navigation, numberOfPosts }) => {
       />
     </View>
   );
-};
+}
 
 export default SubHeader;
 

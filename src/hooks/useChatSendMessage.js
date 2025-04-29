@@ -20,10 +20,10 @@ const useChatSendMessage = ({user, currentUser}) => {
             }
          
             const current = {
-            email: currentUser.email,
-            name: currentUser.name,
-            profile_picture: currentUser.profile_picture,
-            username: currentUser.username,
+            email: currentUser?.email,
+            name: currentUser?.name,
+            profile_picture: currentUser?.profile_picture,
+            username: currentUser?.username,
             status: "unseen",
             };
     
@@ -49,7 +49,7 @@ const useChatSendMessage = ({user, currentUser}) => {
             const currentChatRef = firebase
             .firestore()
             .collection("users")
-            .doc(currentUser.email)
+            .doc(currentUser?.email)
             .collection("chat")
             .doc(user.email);
     
@@ -58,7 +58,7 @@ const useChatSendMessage = ({user, currentUser}) => {
             .collection("users")
             .doc(user.email)
             .collection("chat")
-            .doc(currentUser.email);
+            .doc(currentUser?.email);
     
             batch.set(userRef, notification, { merge: true });
             batch.set(newUserChatRef, current, { merge: true });

@@ -25,7 +25,7 @@ const LikedBy = ({ navigation, user, currentUser }) => {
   };
 
   const handleUserProfile = () => {
-    if (currentUser.email === user.email) {
+    if (currentUser?.email === user.email) {
       navigation.navigate("Profile");
     } else {
       navigation.navigate("UserDetail", {
@@ -40,7 +40,7 @@ const LikedBy = ({ navigation, user, currentUser }) => {
         onPress={() => handleUserProfile()}
         style={styles.rowContainer}
       >
-        {checkStoriesSeen(user.username, currentUser.email) ? (
+        {checkStoriesSeen(user.username, currentUser?.email) ? (
           <LinearGradient
             start={[0.9, 0.45]}
             end={[0.07, 1.03]}
@@ -67,7 +67,7 @@ const LikedBy = ({ navigation, user, currentUser }) => {
           </Text>
         </View>
       </TouchableOpacity>
-      {currentUser.email === user.email ? null : currentUser.following.includes(
+      {currentUser?.email === user.email ? null : currentUser?.following.includes(
           user.email
         ) ? (
         <TouchableOpacity onPress={() => handleModal()}>
@@ -75,7 +75,7 @@ const LikedBy = ({ navigation, user, currentUser }) => {
             <Text style={styles.buttonText}>Following</Text>
           </View>
         </TouchableOpacity>
-      ) : currentUser.following_request.includes(user.email) ? (
+      ) : currentUser?.following_request.includes(user.email) ? (
         <TouchableOpacity onPress={() => handleFollow(user.email)}>
           <View style={styles.buttonGrey}>
             <Text style={styles.buttonText}>Requested</Text>

@@ -11,15 +11,15 @@ const useUploadStory = () => {
             setIsLoading(true);
             try {
                 const timestamp = new Date().getTime();
-                const uploadedImageUrl = await uploadPicture(imageUrl, currentUser.email, timestamp);
+                const uploadedImageUrl = await uploadPicture(imageUrl, currentUser?.email, timestamp);
 
                 const newStory = {
                     imageUrl: uploadedImageUrl,
-                    username: currentUser.username,
-                    name: currentUser.name,
-                    profile_picture: currentUser.profile_picture,
-                    owner_uid: currentUser.owner_uid,
-                    owner_email: currentUser.email,
+                    username: currentUser?.username,
+                    name: currentUser?.name,
+                    profile_picture: currentUser?.profile_picture,
+                    owner_uid: currentUser?.owner_uid,
+                    owner_email: currentUser?.email,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                     likes_by_users: [],
                     new_likes: [],
@@ -29,7 +29,7 @@ const useUploadStory = () => {
                 await firebase
                 .firestore()
                 .collection("users")
-                .doc(currentUser.email)
+                .doc(currentUser?.email)
                 .collection("stories")
                 .add(newStory);
                 

@@ -83,7 +83,7 @@ const FooterTextInput = ({ post, currentUser }) => {
       <View style={styles.writingContainer}>
         <Image
           source={{
-            uri: currentUser.profile_picture,
+            uri: currentUser?.profile_picture,
           }}
           style={styles.profilePicture}
         />

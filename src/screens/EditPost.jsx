@@ -16,7 +16,7 @@ import useEditPostCaption from "../hooks/useEditPostCaption";
 
 const EditPost = ({ navigation, route }) => {
   const { post } = route.params || {};
-  const [value, setValue] = useState(post.caption);
+  const [value, setValue] = useState(post?.caption);
   const { editPostCaption, loading } = useEditPostCaption({ navigation, post });
 
   return (
@@ -55,17 +55,17 @@ const EditPost = ({ navigation, route }) => {
       <View style={styles.postContainer}>
         <View style={styles.rowContainer}>
           <Image
-            source={{ uri: post.profile_picture }}
+            source={{ uri: post?.profile_picture }}
             style={styles.profileImage}
           />
           <View style={styles.userContainer}>
-            <Text style={styles.username}>{post.username}</Text>
+            <Text style={styles.username}>{post?.username}</Text>
             <TouchableOpacity>
               <Text style={styles.name}>Add location...</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <Image source={{ uri: post.imageUrl }} style={styles.image} />
+        <Image source={{ uri: post?.imageUrl }} style={styles.image} />
       </View>
       <View style={styles.inputContainer}>
         <TextInput

@@ -50,7 +50,30 @@ const Reels = ({ navigation }) => {
     handlePress,
   } = usePlayReels({ videoRefs, focusedScreen });
 
+  // const handleLike = (item) => {
+  //   firebase
+  //     .firestore()
+  //     .collection("users")
+  //     .doc(item.owner_email)
+  //     .collection("reels")
+  //     .doc(item.id)
+  //     .update({
+  //       likes_by_users: item.likes_by_users.includes(currentUser?.email)
+  //         ? firebase.firestore.FieldValue.arrayRemove(currentUser?.email)
+  //         : firebase.firestore.FieldValue.arrayUnion(currentUser?.email),
+  //     });
+  // };
+
   const handleLike = (item) => {
+    const userEmail = currentUser?.email;
+  
+    if (!userEmail) {
+      console.warn("User email is undefined, cannot like reel.");
+      return;
+    }
+  
+    const isLiked = item.likes_by_users?.includes(userEmail);
+  
     firebase
       .firestore()
       .collection("users")
@@ -58,19 +81,26 @@ const Reels = ({ navigation }) => {
       .collection("reels")
       .doc(item.id)
       .update({
-        likes_by_users: item.likes_by_users.includes(currentUser.email)
-          ? firebase.firestore.FieldValue.arrayRemove(currentUser.email)
-          : firebase.firestore.FieldValue.arrayUnion(currentUser.email),
+        likes_by_users: isLiked
+          ? firebase.firestore.FieldValue.arrayRemove(userEmail)
+          : firebase.firestore.FieldValue.arrayUnion(userEmail),
+      })
+      .then(() => {
+        console.log("Updated likes successfully");
+      })
+      .catch((err) => {
+        console.error("Error updating likes:", err);
       });
   };
+  
 
   const renderItem = ({ item, index }) => {
     const handleUserProfile = () => {
-      if (currentUser.email === item.owner_email) {
+      if (currentUser?.email === item?.owner_email) {
         navigation.navigate("Profile");
       } else {
         navigation.navigate("UserDetail", {
-          email: item.owner_email,
+          email: item?.owner_email,
         });
       }
     };
@@ -88,13 +118,13 @@ const Reels = ({ navigation }) => {
               ref={(ref) => (videoRefs.current[index] = ref)}
               style={styles.video}
               source={{
-                uri: item.videoUrl,
+                uri: item?.videoUrl,
               }}
-              resizeMode="cover"
+              resizeMode="contain"
               onLoad={() => {
                 if (index === 0) {
                   setCurrentIndex(0);
-                  videoRefs.current[index].playAsync();
+                  videoRefs.current[index]?.playAsync();
                 }
               }}
               isLooping
@@ -107,7 +137,7 @@ const Reels = ({ navigation }) => {
             onPress={() => handleLike(item)}
             style={styles.touchableOpacity}
           >
-            {item.likes_by_users.includes(currentUser.email) ? (
+            {item.likes_by_users?.includes(currentUser?.email) ? (
               <MaterialCommunityIcons
                 name="cards-heart"
                 size={30}
@@ -122,7 +152,7 @@ const Reels = ({ navigation }) => {
                 style={styles.heartIcon}
               />
             )}
-            <Text style={styles.sideText}>{item.likes_by_users.length}</Text>
+            <Text style={styles.sideText}>{item.likes_by_users?.length}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => handleFeatureNotImplemented(setMessageModalVisible)}
@@ -134,7 +164,7 @@ const Reels = ({ navigation }) => {
               color="#fff"
               style={styles.chatIcon}
             />
-            <Text style={styles.sideText}>{item.comments.length}</Text>
+            <Text style={styles.sideText}>{item.comments?.length}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => handleFeatureNotImplemented(setMessageModalVisible)}
@@ -189,7 +219,7 @@ const Reels = ({ navigation }) => {
           </View>
           <Text style={styles.captionText}>{item.caption}</Text>
         </View>
-        <View>
+        {/* <View>
           <Progress.Bar
             progress={progressBarValue}
             width={SIZES.Width}
@@ -198,7 +228,7 @@ const Reels = ({ navigation }) => {
             color="#fff"
             style={styles.progressBar}
           />
-        </View>
+        </View> */}
       </View>
     );
   };
@@ -234,7 +264,7 @@ const Reels = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {muteButtonVisible && (
+      {/* {muteButtonVisible && (
         <Animated.View
           style={styles.muteContainer}
           entering={FadeIn}
@@ -246,7 +276,7 @@ const Reels = ({ navigation }) => {
             color="#fff"
           />
         </Animated.View>
-      )}
+      )} */}
 
       {videos.length > 0 ? (
         <FlatList
@@ -260,11 +290,11 @@ const Reels = ({ navigation }) => {
           pagingEnabled={true}
           onMomentumScrollEnd={(event) => {
             const newIndex = Math.round(
-              event.nativeEvent.contentOffset.y /
-                event.nativeEvent.layoutMeasurement.height
+              event.nativeEvent.contentOffset?.y /
+                event.nativeEvent.layoutMeasurement?.height
             );
 
-            if (videoRefs.current[newIndex - 1]) {
+            if ( videoRefs.current[newIndex - 1]) {
               videoRefs.current[newIndex - 1].pauseAsync();
             }
             if (videoRefs.current[newIndex + 1]) {

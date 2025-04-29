@@ -17,7 +17,7 @@ const useChatAddUser = () => {
         firebase
             .firestore()
             .collection("users")
-            .doc(currentUser.email)
+            .doc(currentUser?.email)
             .collection("chat")
             .doc(user.email)
             .set(newUser);

@@ -8,14 +8,14 @@ const useSavePost = () => {
         if (!isLoading) {
             setIsLoading(true)
             try {
-                if (currentUser.saved_posts.includes(post.id)) {
+                if (currentUser?.saved_posts.includes(post?.id)) {
 
                     await firebase
                         .firestore()
                         .collection("users")
-                        .doc(currentUser.email)
+                        .doc(currentUser?.email)
                         .update({
-                            saved_posts: firebase.firestore.FieldValue.arrayRemove(post.id),
+                            saved_posts: firebase.firestore.FieldValue.arrayRemove(post?.id),
                         });
 
                 } else {
@@ -23,9 +23,9 @@ const useSavePost = () => {
                     await firebase
                         .firestore()
                         .collection("users")
-                        .doc(currentUser.email)
+                        .doc(currentUser?.email)
                         .update({
-                            saved_posts: firebase.firestore.FieldValue.arrayUnion(post.id),
+                            saved_posts: firebase.firestore.FieldValue.arrayUnion(post?.id),
                         });
 
                 }

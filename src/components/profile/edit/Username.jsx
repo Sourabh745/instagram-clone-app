@@ -23,14 +23,14 @@ const Username = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const [loader, setLoader] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const [values, setValues] = useState(currentUser.username);
+  const [values, setValues] = useState(currentUser?.username);
   const [modalText, setModalText] = useState("");
   const { showHiddenModal, animatedModalStyle } = useShowHiddenModal();
   const { startShakeAnimation, animatedShakeStyle, shaking } =
     useShakeAnimation();
 
   useEffect(() => {
-    values === currentUser.username || values === ""
+    values === currentUser?.username || values === ""
       ? setIsValid(false)
       : setIsValid(true);
   }, [values]);
@@ -62,7 +62,7 @@ const Username = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             username: newUsername,
           });
@@ -70,7 +70,7 @@ const Username = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .collection("posts")
           .get()
           .then((snapshot) => {
@@ -84,7 +84,7 @@ const Username = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .collection("stories")
           .get()
           .then((snapshot) => {
@@ -98,7 +98,7 @@ const Username = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .collection("reels")
           .get()
           .then((snapshot) => {
@@ -186,7 +186,7 @@ const Username = ({ navigation }) => {
           <View style={styles.infoContainer}>
             <Text style={styles.infoText}>
               In most cases, you'll be able to change your username back to{" "}
-              <Text style={{ fontWeight: "600" }}>{currentUser.username}</Text>{" "}
+              <Text style={{ fontWeight: "600" }}>{currentUser?.username}</Text>{" "}
               for another 14 days.
             </Text>
           </View>

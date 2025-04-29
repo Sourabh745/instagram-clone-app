@@ -65,7 +65,7 @@ const Follow = ({ navigation }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} disabled>
       <SafeAreaView style={styles.container}>
-        <TitleBar navigation={navigation} name={currentUser.username} />
+        <TitleBar navigation={navigation} name={currentUser?.username} />
         <View style={styles.rowContainer}>
           <TouchableOpacity>
             <Text
@@ -75,8 +75,8 @@ const Follow = ({ navigation }) => {
               }}
               style={styles.textTitle}
             >
-              {currentUser.followers.length > 0
-                ? currentUser.followers.length + "  Followers"
+              {currentUser?.followers.length > 0
+                ? currentUser?.followers.length + "  Followers"
                 : "Followers"}
             </Text>
           </TouchableOpacity>
@@ -88,8 +88,8 @@ const Follow = ({ navigation }) => {
               }}
               style={styles.textTitle}
             >
-              {currentUser.following.length > 0
-                ? currentUser.following.length + "  Following"
+              {currentUser?.following.length > 0
+                ? currentUser?.following.length + "  Following"
                 : "Following"}
             </Text>
           </TouchableOpacity>
@@ -101,8 +101,8 @@ const Follow = ({ navigation }) => {
               }}
               style={styles.textTitle}
             >
-              {currentUser.followers_request.length > 0
-                ? currentUser.followers_request.length + "  Requests"
+              {currentUser?.followers_request?.length > 0
+                ? currentUser?.followers_request?.length + "  Requests"
                 : "Requests"}
             </Text>
           </TouchableOpacity>

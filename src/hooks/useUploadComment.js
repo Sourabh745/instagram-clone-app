@@ -11,9 +11,9 @@ const useUploadComment = (post, currentUser) => {
                 const snapshot = await firebase
                 .firestore()
                 .collection("users")
-                .doc(post.owner_email)
+                .doc(post?.owner_email)
                 .collection("posts")
-                .doc(post.id)
+                .doc(post?.id)
                 .get();
         
             const currentTimestamp = firebase.firestore.Timestamp.now();
@@ -21,9 +21,9 @@ const useUploadComment = (post, currentUser) => {
             if (snapshot.exists) {
                 const postRef = snapshot.ref;
                 const newComment = {
-                    email: currentUser.email,
-                    profile_picture: currentUser.profile_picture,
-                    username: currentUser.username,
+                    email: currentUser?.email,
+                    profile_picture: currentUser?.profile_picture,
+                    username: currentUser?.username,
                     comment: value,
                     createdAt: currentTimestamp,
                     likes_by_users: "",
@@ -33,8 +33,8 @@ const useUploadComment = (post, currentUser) => {
                     comments: firebase.firestore.FieldValue.arrayUnion(newComment),
                 });
 
-                if (post.owner_email !== currentUser.email) {
-                    firebase.firestore().collection("users").doc(post.owner_email).update({
+                if (post?.owner_email !== currentUser?.email) {
+                    firebase.firestore().collection("users").doc(post?.owner_email).update({
                         event_notification: firebase.firestore.FieldValue.increment(1)
                     });
                 }

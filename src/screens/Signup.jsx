@@ -9,14 +9,21 @@ import {
   Platform,
   StatusBar,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import SignupForm from "../components/signup/SignupForm";
 import Footer from "../components/signup/Footer";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { SIZES } from "../constants";
+import { BlurView } from 'expo-blur'; 
+import { useState } from "react";
+
 
 const Signup = ({ navigation }) => {
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <SafeAreaView style={styles.container}>
@@ -34,11 +41,19 @@ const Signup = ({ navigation }) => {
                 />
               </Animated.View>
 
-              <SignupForm navigation={navigation} />
+              <SignupForm navigation={navigation}  setLoading={setLoading}/>
             </View>
           </View>
         </KeyboardAvoidingView>
         <Footer navigation={navigation} />
+        {loading && (
+                  <View style={StyleSheet.absoluteFillObject}>
+                    <BlurView intensity={135} tint="dark" style={StyleSheet.absoluteFill} />
+                    <View style={styles.loadingContainer}>
+                      <ActivityIndicator size="large" color="dodgerblue" />
+                    </View>
+                  </View>
+                )}
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -67,4 +82,10 @@ const styles = StyleSheet.create({
     width: 200,
     contentFit: "cover",
   },
+  loadingContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  }
 });

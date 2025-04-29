@@ -1,5 +1,5 @@
 import { StyleSheet, View, Platform } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { Divider } from "react-native-elements";
 import PostImage from "./PostImage";
@@ -27,6 +27,8 @@ const RenderItem = ({
     setLayoutHeight(height);
   };
 
+  //===========================================
+
   return (
     <View
       style={styles.container}
@@ -45,9 +47,9 @@ const RenderItem = ({
       />
       {Platform.OS === "ios" && sharedIndex === 0 && (
         <Animated.Image
-          source={{ uri: post.imageUrl }}
+          source={{ uri: post?.imageUrl }}
           style={styles.imageContainer}
-          sharedTransitionTag={post.id.toString()}
+          sharedTransitionTag={post?.id.toString()}
         />
       )}
       <PostImage post={post} currentUser={currentUser} />
@@ -57,9 +59,10 @@ const RenderItem = ({
         bottomSheetRef={bottomSheetRefComments}
         setBottomSheetIndex={setBottomSheetIndex}
         sharedIndex={sharedIndex}
+        
       />
 
-      <Likes post={post} navigation={navigation} />
+      <Likes post={post} navigation={navigation}  />
 
       <Caption post={post} />
       <Comments

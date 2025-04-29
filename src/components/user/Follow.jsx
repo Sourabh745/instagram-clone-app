@@ -25,7 +25,7 @@ const Follow = ({ user, currentUser, navigation }) => {
   };
 
   const handleViewProfile = () => {
-    if (currentUser.email === user.email) {
+    if (currentUser?.email === user.email) {
       navigation.navigate("Profile");
     } else {
       navigation.replace("UserDetail", {
@@ -38,7 +38,7 @@ const Follow = ({ user, currentUser, navigation }) => {
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => handleViewProfile()}>
         <View style={styles.rowContainer}>
-          {checkStoriesSeen(user.username, currentUser.email) ? (
+          {checkStoriesSeen(user.username, currentUser?.email) ? (
             <LinearGradient
               start={[0.9, 0.45]}
               end={[0.07, 1.03]}
@@ -70,7 +70,7 @@ const Follow = ({ user, currentUser, navigation }) => {
       </TouchableWithoutFeedback>
 
       {user.username ===
-      currentUser.username ? null : currentUser.following.includes(
+      currentUser?.username ? null : currentUser?.following.includes(
           user.email
         ) ? (
         <TouchableOpacity onPress={() => handleModal()}>
@@ -78,7 +78,7 @@ const Follow = ({ user, currentUser, navigation }) => {
             <Text style={styles.buttonText}>Following</Text>
           </View>
         </TouchableOpacity>
-      ) : currentUser.following_request.includes(user.email) ? (
+      ) : currentUser?.following_request.includes(user.email) ? (
         <TouchableOpacity onPress={() => handleFollow()}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Requested</Text>

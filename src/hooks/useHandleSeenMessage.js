@@ -6,7 +6,7 @@ const useHandleSeenMessage = () => {
         await firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .collection("chat")
         .doc(user.email)
         .update({

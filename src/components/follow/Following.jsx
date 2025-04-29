@@ -31,7 +31,7 @@ const Following = ({ user, currentUser, navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => handleViewProfile()}>
-        {checkStoriesSeen(user.username, currentUser.email) ? (
+        {checkStoriesSeen(user.username, currentUser?.email) ? (
           <View style={styles.rowContainer}>
             <LinearGradient
               start={[0.9, 0.45]}

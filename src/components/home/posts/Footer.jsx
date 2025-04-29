@@ -1,12 +1,13 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BottomSheetComments from "../bottomSheets/BottomSheetComments";
 import useSharePost from "../../../hooks/useSharePost";
 import useSavePost from "../../../hooks/useSavePost";
 import useHandleLike from "../../../hooks/useHandleLike";
 
-const Footer = ({ post, currentUser, navigation }) => {
+
+const Footer = ({ post, currentUser, navigation, setLocalLiked, localLiked ,isLiked, setIsLiked, setDoubleTapStatus, doubleTapStatus }) => {
   const { handlePostLike } = useHandleLike();
   const { sharePost } = useSharePost();
   const { savePost } = useSavePost();
@@ -16,11 +17,18 @@ const Footer = ({ post, currentUser, navigation }) => {
     bottomSheetRef.current.present();
   };
 
+  useEffect(() => {
+    console.log(localLiked);
+    console.log(isLiked);
+    console.log(doubleTapStatus);
+  }, [localLiked, isLiked]);
+
   return (
     <View style={styles.footerIconsContainer}>
       <View style={styles.footerIcons}>
-        <TouchableOpacity onPress={() => handlePostLike(post, currentUser)}>
-          {post.likes_by_users.includes(currentUser.email) ? (
+        <TouchableOpacity onPress={() => {handlePostLike(post, currentUser, setLocalLiked, setIsLiked, isLiked, setDoubleTapStatus)}}>
+          { isLiked ? (
+          // {post?.likes_by_users.includes(currentUser?.email) ? (
             <MaterialCommunityIcons
               name="cards-heart"
               size={27}
@@ -58,8 +66,8 @@ const Footer = ({ post, currentUser, navigation }) => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => savePost(post, currentUser)}>
-        {currentUser.saved_posts &&
-        currentUser.saved_posts.includes(post.id) ? (
+        {currentUser?.saved_posts &&
+        currentUser?.saved_posts.includes(post?.id) ? (
           <Ionicons
             name="bookmark"
             size={24}

@@ -8,16 +8,16 @@ const useHandleRequests = ({ currentUser, user }) => {
             .collection("users")
             .doc(user.email)
             .update({
-              following_request: firebase.firestore.FieldValue.arrayRemove(currentUser.email),
+              following_request: firebase.firestore.FieldValue.arrayRemove(currentUser?.email),
               ...(accept && {
-                following: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
+                following: firebase.firestore.FieldValue.arrayUnion(currentUser?.email),
               }),
             });
     
           firebase
             .firestore()
             .collection("users")
-            .doc(currentUser.email)
+            .doc(currentUser?.email)
             .update({
               followers_request: firebase.firestore.FieldValue.arrayRemove(user.email),
               ...(accept && {

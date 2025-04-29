@@ -19,7 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const Favorites = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const { filteredPosts, isLoading, fetchOlderPosts, refreshPosts } =
-    useFilterPosts(currentUser.favorite_users);
+    useFilterPosts(currentUser?.favorite_users);
 
   const renderPostItem = ({ item }) => {
     return (

@@ -8,16 +8,16 @@ const useHandleCommentLike = () => {
         setIsLoading(true);
         try {
             const currentLikeStatus = singleComment.likes_by_users.includes(
-            currentUser.email
+            currentUser?.email
             );
 
             let updatedValues = allComments;
             if (currentLikeStatus == true) {
             updatedValues[targetIndex].likes_by_users = updatedValues[
                 targetIndex
-            ].likes_by_users.replace(currentUser.email + ",", "");
+            ].likes_by_users.replace(currentUser?.email + ",", "");
             } else {
-            updatedValues[targetIndex].likes_by_users += currentUser.email + ",";
+            updatedValues[targetIndex].likes_by_users += currentUser?.email + ",";
             }
 
             const snapshot = await firebase

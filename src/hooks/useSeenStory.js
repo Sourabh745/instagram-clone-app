@@ -4,7 +4,7 @@ import firebase from "firebase/compat";
 const useSeenStory = ({ stories, currentUser,currentStoryIndex}) => {
     useEffect(() => {
         if (
-          !stories[currentStoryIndex].seen_by_users.includes(currentUser.email)
+          !stories[currentStoryIndex].seen_by_users.includes(currentUser?.email)
         ) {
           firebase
             .firestore()
@@ -13,7 +13,7 @@ const useSeenStory = ({ stories, currentUser,currentStoryIndex}) => {
             .collection("stories")
             .doc(stories[currentStoryIndex].id)
             .update({
-              seen_by_users: firebase.firestore.FieldValue.arrayUnion(currentUser.email),
+              seen_by_users: firebase.firestore.FieldValue.arrayUnion(currentUser?.email),
             });
         }
       }, [currentStoryIndex]);

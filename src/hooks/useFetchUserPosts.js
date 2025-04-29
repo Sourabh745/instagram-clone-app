@@ -20,7 +20,7 @@ const useFetchUserPosts = (email) => {
                 .orderBy("createdAt", "desc")
                 .limit(loadLimit)
                 .onSnapshot(snapshot => {
-                    const data = snapshot.docs.map(post => ({ id: post.id, ...post.data() }));
+                    const data = snapshot.docs.map(post => ({ id: post?.id, ...post?.data() }));
                     if (data.length <= 0) {
                         setPosts([{id: "empty"}]);
                     } else {

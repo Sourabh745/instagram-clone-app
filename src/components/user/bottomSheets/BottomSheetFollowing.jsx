@@ -18,9 +18,9 @@ const BottomSheetFollowing = ({ bottomSheetRef, currentUser, user }) => {
   const [mute, setMute] = useState(false);
 
   useEffect(() => {
-    setCloseFriend(currentUser.close_friends.includes(user.email));
-    setFavorites(currentUser.favorite_users.includes(user.email));
-    setMute(currentUser.muted_users.includes(user.email));
+    setCloseFriend(currentUser?.close_friends.includes(user.email));
+    setFavorites(currentUser?.favorite_users.includes(user.email));
+    setMute(currentUser?.muted_users.includes(user.email));
   }, []);
 
   handleCloseFriend = () => {
@@ -28,7 +28,7 @@ const BottomSheetFollowing = ({ bottomSheetRef, currentUser, user }) => {
       firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .update({
           close_friends: !closeFriend
             ? firebase.firestore.FieldValue.arrayUnion(user.email)
@@ -46,7 +46,7 @@ const BottomSheetFollowing = ({ bottomSheetRef, currentUser, user }) => {
       firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .update({
           favorite_users: !favorites
             ? firebase.firestore.FieldValue.arrayUnion(user.email)
@@ -64,7 +64,7 @@ const BottomSheetFollowing = ({ bottomSheetRef, currentUser, user }) => {
       firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .update({
           muted_users: !mute
             ? firebase.firestore.FieldValue.arrayUnion(user.email)

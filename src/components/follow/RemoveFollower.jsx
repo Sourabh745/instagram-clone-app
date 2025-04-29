@@ -21,7 +21,7 @@ const RemoveFollower = ({ handleModal, user }) => {
         firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             followers: firebase.firestore.FieldValue.arrayRemove(user.email),
           });
@@ -31,7 +31,7 @@ const RemoveFollower = ({ handleModal, user }) => {
           .doc(user.email)
           .update({
             following: firebase.firestore.FieldValue.arrayRemove(
-              currentUser.email
+              currentUser?.email
             ),
           });
         handleModal();

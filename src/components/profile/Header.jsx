@@ -16,7 +16,7 @@ const Header = ({ currentUser, navigation }) => {
         onPress={() => bottomSheetRefLogout.current.present()}
         style={styles.usernameContainer}
       >
-        <Text style={styles.username}>{currentUser.username}</Text>
+        <Text style={styles.username}>{currentUser?.username}</Text>
         <MaterialIcons
           name="keyboard-arrow-down"
           size={24}

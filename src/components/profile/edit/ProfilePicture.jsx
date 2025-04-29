@@ -29,6 +29,7 @@ const ProfilePicture = ({ bottomSheetRef, currentUser, onPropChange }) => {
     onPropChange(previewImage);
   }, [previewImage]);
 
+
   const handleCameraPicture = () => {
     setCameraModalVisible(true);
   };
@@ -40,6 +41,7 @@ const ProfilePicture = ({ bottomSheetRef, currentUser, onPropChange }) => {
   const handleRemovePicture = () => {
     setPreviewImage(blankUserImageUri);
   };
+
 
   return (
     <BottomSheetModal
@@ -57,7 +59,7 @@ const ProfilePicture = ({ bottomSheetRef, currentUser, onPropChange }) => {
       <View style={styles.mainContainer}>
         <Image
           source={{
-            uri: previewImage ? previewImage : currentUser.profile_picture,
+            uri: previewImage ? previewImage : currentUser?.profile_picture,
           }}
           style={styles.image}
         />

@@ -28,7 +28,7 @@ const Interaction = ({ navigation, item, currentUser, text }) => {
       <View style={styles.rowContainer}>
         <TouchableOpacity onPress={() => handleUserProfile()}>
           {text === "commented" &&
-          checkStoriesSeen(item.username, currentUser.email) ? (
+          checkStoriesSeen(item.username, currentUser?.email) ? (
             <LinearGradient
               start={[0.9, 0.45]}
               end={[0.07, 1.03]}
@@ -68,8 +68,8 @@ const Interaction = ({ navigation, item, currentUser, text }) => {
           <TouchableOpacity onPress={() => handleCheckPost()}>
             <Text style={styles.name}>
               {text === "commented"
-                ? "Commented your post."
-                : "Liked your post."}
+                ? "Commented your post?."
+                : "Liked your post?."}
             </Text>
           </TouchableOpacity>
         </View>

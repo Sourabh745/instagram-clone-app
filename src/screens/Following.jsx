@@ -19,7 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const Following = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const { filteredPosts, isLoading, fetchOlderPosts, refreshPosts } =
-    useFilterPosts(currentUser.following);
+    useFilterPosts(currentUser?.following);
 
   const renderPostItem = ({ item }) => (
     <Posts navigation={navigation} post={item} currentUser={currentUser} />

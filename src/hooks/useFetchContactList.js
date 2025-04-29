@@ -10,7 +10,7 @@ const useFetchContactList = () => {
         firebase
         .firestore()
         .collection("users")
-        .doc(currentUser.email)
+        .doc(currentUser?.email)
         .collection("chat")
         .onSnapshot((snapshot) => {
             const data = snapshot.docs.map((doc, index) => ({ id: index, ...doc.data() }));

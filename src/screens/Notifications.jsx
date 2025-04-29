@@ -20,14 +20,14 @@ import firebase from "firebase/compat";
 
 const Notifications = ({ navigation, route }) => {
   const { currentUser } = route.params;
-  const { posts } = useFetchUserPosts(currentUser.email);
+  const { posts } = useFetchUserPosts(currentUser?.email);
   const { requests } = useFetchRequests({ user: currentUser });
   const [notificationCounter, setNotificationCounter] = useState(0);
 
   useEffect(() => {
-    if (currentUser.event_notification > 0) {
+    if (currentUser?.event_notification > 0) {
       try {
-        firebase.firestore().collection("users").doc(currentUser.email).update({
+        firebase.firestore().collection("users").doc(currentUser?.email).update({
           event_notification: 0,
         });
       } catch (error) {
@@ -40,24 +40,24 @@ const Notifications = ({ navigation, route }) => {
     counter = 0;
 
     for (let i = 0; i < posts.length; i++) {
-      if (posts[i].comments && posts[i].comments.length > 0) {
+      if (posts[i].comments && posts[i].comments?.length > 0) {
         if (
-          posts[i].comments[posts[i].comments.length - 1].email !==
-          currentUser.email
+          posts[i].comments[posts[i].comments?.length - 1].email !==
+          currentUser?.email
         ) {
           counter++;
         }
       }
-      if (posts[i].new_likes.length > 0) {
+      if (posts[i].new_likes?.length > 0) {
         counter++;
       }
     }
 
     if (
-      currentUser.followers_request &&
-      currentUser.followers_request.length > 0
+      currentUser?.followers_request &&
+      currentUser?.followers_request?.length > 0
     ) {
-      counter = counter + currentUser.followers_request.length;
+      counter = counter + currentUser?.followers_request?.length;
     }
 
     setNotificationCounter(counter);
@@ -74,8 +74,8 @@ const Notifications = ({ navigation, route }) => {
       </TouchableOpacity>
       {notificationCounter > 0 ? (
         <View>
-          {currentUser.followers_request &&
-            currentUser.followers_request.length > 0 && (
+          {currentUser?.followers_request &&
+            currentUser?.followers_request?.length > 0 && (
               <View>
                 <Text style={styles.subtitle}>Followers Requests:</Text>
                 <FlatList
@@ -94,9 +94,9 @@ const Notifications = ({ navigation, route }) => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) =>
                 item.id !== "empty" &&
-                item.comments.length > 0 &&
-                item.comments[item.comments.length - 1].username !==
-                  currentUser.username ? (
+                item.comments?.length > 0 &&
+                item.comments[item.comments?.length - 1].username !==
+                  currentUser?.username ? (
                   <Interaction
                     navigation={navigation}
                     item={item}
@@ -105,7 +105,7 @@ const Notifications = ({ navigation, route }) => {
                   />
                 ) : (
                   item.id !== "empty" &&
-                  item.new_likes.length > 0 && (
+                  item.new_likes?.length > 0 && (
                     <Interaction
                       navigation={navigation}
                       item={item}

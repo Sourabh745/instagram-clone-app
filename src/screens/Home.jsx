@@ -38,7 +38,7 @@ const Home = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Animated.View
         style={[
-          styles.header(65),
+          styles.header(55),
           { transform: [{ translateY: headerTranslate }] },
         ]}
       >
@@ -91,10 +91,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    top: 36,
+    top: 30,
     height: ContainerHeight,
     zIndex: 1,
     backgroundColor: "#000",
+
   }),
   contentContainer: (ContainerHeight) => ({
     paddingTop: ContainerHeight,

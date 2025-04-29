@@ -5,7 +5,7 @@ import StoryHighlights from "../components/profile/StoryHighlights";
 import Header from "../components/profile/Header";
 
 const Profile = ({ navigation }) => {
-  const { currentUser } = useUserContext();
+  const { currentUser} = useUserContext();
 
   return (
     <SafeAreaView style={styles.container}>

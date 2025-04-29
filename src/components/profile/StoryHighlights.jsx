@@ -8,7 +8,7 @@ import RenderItem from "../shared/RenderItem";
 
 const StoryHighlights = ({ navigation, currentUser }) => {
   const { posts, loader, fetchOlderPosts, refreshPosts } = useFetchUserPosts(
-    currentUser.email
+    currentUser?.email
   );
 
   const renderListHeaderComponent = () => (

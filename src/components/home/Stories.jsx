@@ -24,11 +24,11 @@ const Stories = ({ navigation, currentUser }) => {
   useEffect(() => {
     setOwnStory(
       stories.find((story) => {
-        return story.username === currentUser.username;
+        return story.username === currentUser?.username;
       })
     );
 
-    setSeenOwnStory(checkStoriesSeen(currentUser.username, currentUser.email));
+    setSeenOwnStory(checkStoriesSeen(currentUser?.username, currentUser?.email));
 
     const uniqueStories = {};
     const uniqueStoriesArray = [];
@@ -58,7 +58,7 @@ const Stories = ({ navigation, currentUser }) => {
                 ownStory
                   ? navigation.navigate("Story", {
                       stories: stories.filter(
-                        (story) => story.username === currentUser.username
+                        (story) => story.username === currentUser?.username
                       ),
                       currentUser: currentUser,
                     })
@@ -73,7 +73,7 @@ const Stories = ({ navigation, currentUser }) => {
                   <View style={styles.emptyStoryBorder}>
                     <Image
                       source={{
-                        uri: currentUser.profile_picture,
+                        uri: currentUser?.profile_picture,
                       }}
                       style={styles.image}
                     />
@@ -89,7 +89,7 @@ const Stories = ({ navigation, currentUser }) => {
                   <View style={styles.seenStoryBorder}>
                     <Image
                       source={{
-                        uri: currentUser.profile_picture,
+                        uri: currentUser?.profile_picture,
                       }}
                       style={styles.imageWithStory}
                     />
@@ -107,7 +107,7 @@ const Stories = ({ navigation, currentUser }) => {
                   >
                     <Image
                       source={{
-                        uri: currentUser.profile_picture,
+                        uri: currentUser?.profile_picture,
                       }}
                       style={styles.imageWithStory}
                     />
@@ -119,7 +119,7 @@ const Stories = ({ navigation, currentUser }) => {
             </TouchableOpacity>
           </View>
           {reducedStories
-            .filter((story) => story.username != currentUser.username)
+            .filter((story) => story.username != currentUser?.username)
             .map((story, index) => (
               <View style={styles.container} key={index}>
                 <TouchableOpacity
@@ -132,7 +132,7 @@ const Stories = ({ navigation, currentUser }) => {
                     })
                   }
                 >
-                  {checkStoriesSeen(story.username, currentUser.email) ? (
+                  {checkStoriesSeen(story.username, currentUser?.email) ? (
                     <View style={styles.itemContainer}>
                       <View style={styles.seenStoryBorder}>
                         <Image

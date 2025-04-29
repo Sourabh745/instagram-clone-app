@@ -19,10 +19,10 @@ const Name = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const [loader, setLoader] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const [values, setValues] = useState(currentUser.name);
+  const [values, setValues] = useState(currentUser?.name);
 
   useEffect(() => {
-    values === currentUser.name ? setIsValid(false) : setIsValid(true);
+    values === currentUser?.name ? setIsValid(false) : setIsValid(true);
   }, [values]);
 
   const handleSubmitName = async (values) => {
@@ -32,7 +32,7 @@ const Name = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             name: values,
           });

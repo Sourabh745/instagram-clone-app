@@ -28,17 +28,17 @@ const Comments = ({ post, currentUser, navigation }) => {
 
   return (
     <View>
-      {post.comments.length <= 0 ? (
+      {post?.comments.length <= 0 ? (
         <TouchableOpacity onPress={() => handleViewComment()}>
           <View style={styles.container}>
             <Image
-              source={{ uri: currentUser.profile_picture }}
+              source={{ uri: currentUser?.profile_picture }}
               style={styles.image}
             />
             <Text style={styles.text}>Add a comment...</Text>
           </View>
         </TouchableOpacity>
-      ) : post.comments.length > 1 ? (
+      ) : post?.comments.length > 1 ? (
         <TouchableOpacity
           onPress={() => {
             handleViewComments();
@@ -46,7 +46,7 @@ const Comments = ({ post, currentUser, navigation }) => {
         >
           <View style={styles.container}>
             <Text style={styles.text}>
-              View all {post.comments.length} comments
+              View all {post?.comments.length} comments
             </Text>
           </View>
         </TouchableOpacity>

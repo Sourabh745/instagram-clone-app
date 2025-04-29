@@ -85,7 +85,7 @@ const BottomSheetComments = ({
     >
       <View style={styles.mainContainer}>
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          {post.comments.length > 0 ? (
+          {post?.comments.length > 0 ? (
             <View
               style={[
                 styles.iosVsAndroidContainer,
@@ -98,16 +98,16 @@ const BottomSheetComments = ({
             >
               <BottomSheetFlatList
                 inverted
-                data={post.comments}
+                data={post?.comments}
                 renderItem={({ item, index }) => (
                   <Comments
                     comment={item}
                     key={index}
                     index={index}
-                    postId={post.id}
-                    userId={post.owner_email}
+                    postId={post?.id}
+                    userId={post?.owner_email}
                     currentUser={currentUser}
-                    comments={post.comments}
+                    comments={post?.comments}
                     navigation={navigation}
                     bottomSheetRef={bottomSheetRef}
                   />

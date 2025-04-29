@@ -34,7 +34,7 @@ const Followers = ({ user, currentUser, navigation }) => {
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={() => handleViewProfile()}>
         <View style={styles.rowContainer}>
-          {checkStoriesSeen(user.username, currentUser.email) ? (
+          {checkStoriesSeen(user.username, currentUser?.email) ? (
             <LinearGradient
               start={[0.9, 0.45]}
               end={[0.07, 1.03]}
@@ -55,11 +55,11 @@ const Followers = ({ user, currentUser, navigation }) => {
 
           <View style={styles.userContainer}>
             <View style={styles.rowContainer}>
-              {currentUser.following.includes(user.email) ? (
+              {currentUser?.following.includes(user.email) ? (
                 <Text numberOfLines={1} style={styles.username}>
                   {user.username}
                 </Text>
-              ) : currentUser.following_request.includes(user.email) ? (
+              ) : currentUser?.following_request.includes(user.email) ? (
                 <View style={{ flexDirection: "row" }}>
                   <Text numberOfLines={1} style={styles.username}>
                     {user.username}

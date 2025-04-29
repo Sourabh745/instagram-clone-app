@@ -15,7 +15,8 @@ import firebase from "firebase/compat";
 import MessageModal from "../shared/modals/MessageModal";
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 
-const LoginForm = ({ navigation }) => {
+
+const LoginForm = ({ navigation, setLoading }) => {
   const [obsecureText, setObsecureText] = useState(true);
   const [emailOnFocus, setEmailOnFocus] = useState(false);
   const [emailToValidate, SetEmailToValidate] = useState(false);
@@ -51,26 +52,33 @@ const LoginForm = ({ navigation }) => {
   });
 
   const onLogin = async (email, password) => {
+    setLoading(true); //loading
+
     Keyboard.dismiss();
     try {
+      setLoading(true); // loading
+
       const userCredentials = await firebase
         .auth()
         .signInWithEmailAndPassword(email, password);
+        setLoading(false); // loading
+
       console.log(
         "🔥 Firebase Login Successful ✅",
         userCredentials.user.email
       );
     } catch (error) {
+      setLoading(false);
       error.message ==
         "Firebase: The password is invalid or the user does not have a password. (auth/wrong-password)." &&
         handleDataError("The password is invalid, try again.");
-      error.message ==
+      error.message ==-
         "Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found)." &&
         handleDataError("Invalid email. Please verify your input.");
     }
   };
 
-  return (
+  return(
     <View style={styles.container}>
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -178,7 +186,7 @@ const LoginForm = ({ navigation }) => {
                 >
                   <Ionicons name={"logo-react"} size={24} color="#fff" />
                   <Text style={styles.modalText}>
-                    Developed by Hernan Hawryluk
+                    Developed by Redsky Advance Solutions Pvt. Ltd.
                   </Text>
                 </Animated.View>
               )}
@@ -194,7 +202,7 @@ const LoginForm = ({ navigation }) => {
         icon="wrong"
       />
     </View>
-  );
+  )
 };
 
 export default LoginForm;

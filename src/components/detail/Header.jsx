@@ -23,12 +23,12 @@ const Header = ({
   const { checkStoriesSeen } = useCheckStoriesSeen();
 
   const handlePostOwner = () => {
-    if (currentUser.email === post.owner_email) {
+    if (currentUser?.email === post?.owner_email) {
       navigation.navigate("Profile");
     } else {
       navigation.popToTop();
       navigation.navigate("UserDetail", {
-        email: post.owner_email,
+        email: post?.owner_email,
       });
     }
   };
@@ -40,9 +40,9 @@ const Header = ({
           onPress={() => handlePostOwner()}
           style={styles.headerUserContainer}
         >
-          {checkStoriesSeen(post.username, currentUser.email) ? (
+          {checkStoriesSeen(post?.username, currentUser?.email) ? (
             <Image
-              source={{ uri: post.profile_picture }}
+              source={{ uri: post?.profile_picture }}
               style={styles.headerImage}
             />
           ) : (
@@ -53,12 +53,12 @@ const Header = ({
               style={styles.unseenRainbowBorder}
             >
               <Image
-                source={{ uri: post.profile_picture }}
+                source={{ uri: post?.profile_picture }}
                 style={styles.headerImage}
               />
             </LinearGradient>
           )}
-          <Text style={styles.headerText}>{post.username.toLowerCase()}</Text>
+          <Text style={styles.headerText}>{post?.username.toLowerCase()}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

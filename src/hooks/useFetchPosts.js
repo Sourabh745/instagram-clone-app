@@ -17,7 +17,7 @@ useEffect(() => {
               .orderBy("createdAt", "desc")
               .limit(loadLimit)
               .onSnapshot(snapshot => {
-                  const updatedPosts = snapshot.docs.map(post => ({ id: post.id, ...post.data() }));
+                  const updatedPosts = snapshot.docs.map(post => ({ id: post?.id, ...post?.data() }));
                   setPosts(updatedPosts);
             });
 
@@ -36,7 +36,7 @@ useEffect(() => {
             setJustRequested(true);
             setTimeout(() => {
                 setJustRequested(false);
-            }, 5000)
+            }, 4000)
             setLoadLimit(loadLimit + 20);
         }
     };
@@ -46,7 +46,7 @@ useEffect(() => {
             setJustRequested(true);
             setTimeout(() => {
                 setJustRequested(false);
-            }, 5000)
+            }, 4000)
             setLoadLimit(20);
         }
     };

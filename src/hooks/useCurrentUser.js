@@ -2,7 +2,7 @@ import firebase from "firebase/compat";
 import { useEffect, useState } from "react";
 
 export const useCurrentUser = () => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setcurrentUser] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export const useCurrentUser = () => {
                         .collection("users")
                         .doc(user.email)
                         .onSnapshot(snapshot => {
-                          setCurrentUser(snapshot.data())
+                          setcurrentUser(snapshot.data())
                         });
 
                     return () => unsubscribe;

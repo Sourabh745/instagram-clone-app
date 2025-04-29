@@ -5,10 +5,10 @@ import SignedInStack from "./SignedInStack";
 import firebase from "../services/firebase";
 
 const AuthNavigation = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setcurrentUser] = useState(null);
 
   const userHandler = (user) =>
-    user ? setCurrentUser(user) : setCurrentUser(null);
+    user ? setcurrentUser(user) : setcurrentUser(null);
 
   useEffect(
     () => firebase.auth().onAuthStateChanged((user) => userHandler(user)),

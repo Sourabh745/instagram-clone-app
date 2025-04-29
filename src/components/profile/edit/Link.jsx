@@ -19,7 +19,7 @@ import useIsURL from "../../../utils/useIsURL";
 const Link = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const [loader, setLoader] = useState(false);
-  const [values, setValues] = useState(currentUser.link);
+  const [values, setValues] = useState(currentUser?.link);
   const [isValid, setIsValid] = useState(false);
   const { isURL } = useIsURL();
 
@@ -38,7 +38,7 @@ const Link = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             link: values,
           });

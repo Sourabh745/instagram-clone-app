@@ -14,6 +14,7 @@ import { Divider } from "react-native-elements";
 import LikedBy from "../components/likes/LikedBy";
 import { useUserContext } from "../contexts/UserContext";
 
+
 const Likes = ({ navigation, route }) => {
   const { likesByEmail } = route.params;
   const { currentUser } = useUserContext();
@@ -23,13 +24,13 @@ const Likes = ({ navigation, route }) => {
   const [filteredLikes, setFilteredLikes] = useState({});
 
   const childPropChange = (searchKey) => {
-    if (likesByUsers.length > 0) {
+    if (likesByUsers?.length > 0) {
       setOnSearch(true);
-      const filteredData = likesByUsers.filter(
+      const filteredData = likesByUsers?.filter(
         (userLike) =>
-          userLike.username.includes(searchKey) ||
-          userLike.name.toLowerCase().includes(searchKey) ||
-          userLike.email.includes(searchKey)
+          userLike.username?.includes(searchKey) ||
+          userLike.name?.toLowerCase()?.includes(searchKey) ||
+          userLike.email?.includes(searchKey)
       );
       setFilteredLikes(filteredData);
     }

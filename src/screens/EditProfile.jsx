@@ -32,10 +32,10 @@ const EditProfile = ({ navigation }) => {
   const handleUploadPicture = async () => {
     const uploadedImageUri = await uploadPicture(
       previewImage,
-      currentUser.email,
+      currentUser?.email,
       "profile_picture"
     );
-    await uploadProfilePicture(uploadedImageUri, currentUser.email);
+    await uploadProfilePicture(uploadedImageUri, currentUser?.email);
   };
 
   const handlePictureModal = () => {
@@ -70,7 +70,7 @@ const EditProfile = ({ navigation }) => {
         <TouchableOpacity onPress={() => handlePictureModal()}>
           <Image
             source={{
-              uri: previewImage ? previewImage : currentUser.profile_picture,
+              uri: previewImage ? previewImage : currentUser?.profile_picture,
             }}
             style={styles.image}
           />
@@ -88,12 +88,12 @@ const EditProfile = ({ navigation }) => {
           <Text style={styles.descriptiveText}>Name</Text>
           <Text
             style={
-              currentUser.name.length > 0
+              currentUser?.name.length > 0
                 ? styles.editableText
                 : styles.editableBlurText
             }
           >
-            {currentUser.name.length > 0 ? currentUser.name : "Name"}
+            {currentUser?.name.length > 0 ? currentUser?.name : "Name"}
           </Text>
         </TouchableOpacity>
         <Divider width={0.4} color={"#222"} />
@@ -104,7 +104,7 @@ const EditProfile = ({ navigation }) => {
           style={styles.rowContainer}
         >
           <Text style={styles.descriptiveText}>Username</Text>
-          <Text style={styles.editableText}>{currentUser.username}</Text>
+          <Text style={styles.editableText}>{currentUser?.username}</Text>
         </TouchableOpacity>
         <Divider width={0.4} color={"#222"} />
         <TouchableOpacity
@@ -116,12 +116,12 @@ const EditProfile = ({ navigation }) => {
           <Text style={styles.descriptiveText}>Bio</Text>
           <Text
             style={
-              currentUser.bio.length > 0
+              currentUser?.bio.length > 0
                 ? styles.editableText
                 : styles.editableBlurText
             }
           >
-            {currentUser.bio.length > 0 ? currentUser.bio : "Bio"}
+            {currentUser?.bio.length > 0 ? currentUser?.bio : "Bio"}
           </Text>
         </TouchableOpacity>
         <Divider width={0.4} color={"#222"} />
@@ -135,12 +135,12 @@ const EditProfile = ({ navigation }) => {
           <Text
             numberOfLines={1}
             style={
-              currentUser.link.length > 0
+              currentUser?.link.length > 0
                 ? styles.editableText
                 : styles.editableBlurText
             }
           >
-            {currentUser.link.length > 0 ? currentUser.link : "Add a Link"}
+            {currentUser?.link.length > 0 ? currentUser?.link : "Add a Link"}
           </Text>
           <MaterialIcons name="keyboard-arrow-right" size={24} color="#999" />
         </TouchableOpacity>
@@ -153,9 +153,9 @@ const EditProfile = ({ navigation }) => {
         >
           <Text style={styles.descriptiveText}>Gender</Text>
           <Text style={styles.editableText}>
-            {currentUser.gender[0] == "Custom"
-              ? currentUser.gender[1]
-              : currentUser.gender[0]}
+            {currentUser?.gender[0] == "Custom"
+              ? currentUser?.gender[1]
+              : currentUser?.gender[0]}
           </Text>
           <MaterialIcons name="keyboard-arrow-right" size={24} color="#999" />
         </TouchableOpacity>

@@ -6,9 +6,9 @@ const useDeletePost = () => {
             firebase
                 .firestore()
                 .collection("users")
-                .doc(post.owner_email)
+                .doc(post?.owner_email)
                 .collection("posts")
-                .doc(post.id)
+                .doc(post?.id)
                 .delete()
 
         } catch (error) {

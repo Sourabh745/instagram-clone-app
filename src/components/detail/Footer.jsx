@@ -33,7 +33,7 @@ const Footer = ({
     <View style={styles.footerIconsContainer}>
       <View style={styles.footerIcons}>
         <TouchableOpacity onPress={() => handlePostLike(post, currentUser)}>
-          {post.likes_by_users.includes(currentUser.email) ? (
+          {post?.likes_by_users.includes(currentUser?.email) ? (
             <MaterialCommunityIcons
               name="cards-heart"
               size={27}
@@ -67,7 +67,7 @@ const Footer = ({
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => handleSavePost()}>
-        {currentUser.saved_posts.includes(post.id) ? (
+        {currentUser?.saved_posts.includes(post?.id) ? (
           <Ionicons
             name="bookmark"
             size={24}

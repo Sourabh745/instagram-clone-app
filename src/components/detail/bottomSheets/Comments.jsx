@@ -91,7 +91,7 @@ const Comments = ({
         </View>
       </View>
 
-      {comment.username !== currentUser.username ? (
+      {comment.username !== currentUser?.username ? (
         <TouchableOpacity
           onPress={() =>
             handleCommentLike(
@@ -106,13 +106,13 @@ const Comments = ({
         >
           <Ionicons
             name={
-              comment.likes_by_users.includes(currentUser.email)
+              comment.likes_by_users.includes(currentUser?.email)
                 ? "heart"
                 : "heart-outline"
             }
             size={17}
             color={
-              comment.likes_by_users.includes(currentUser.email)
+              comment.likes_by_users.includes(currentUser?.email)
                 ? "#c11"
                 : "#fff"
             }

@@ -8,7 +8,7 @@ import {
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
-import { Camera } from "expo-camera";
+import { Camera, FlashMode, CameraType } from "expo-camera/legacy";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { SIZES } from "../../constants";
 import CameraNoPermission from "./CameraNoPermission";
@@ -21,8 +21,8 @@ const CameraModule = ({
   options = false,
 }) => {
   const camRef = useRef(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flashMode, setFlashMode] = useState(Camera.Constants.FlashMode.off);
+  const [type, setType] = useState(CameraType.back);
+  const [flashMode, setFlashMode] = useState(FlashMode.off);
   const [hasPermission, setHasPermission] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const CameraModule = ({
 
   const handleTakePicture = async () => {
     if (camRef) {
-      const data = await camRef.current.takePictureAsync();
+      const data = await camRef.current?.takePictureAsync();
       const imageUri = data.uri;
 
       setCapturedPhoto(imageUri);
@@ -97,15 +97,15 @@ const CameraModule = ({
           <TouchableOpacity
             onPress={() => {
               setFlashMode(
-                flashMode === Camera.Constants.FlashMode.off
-                  ? Camera.Constants.FlashMode.on
-                  : Camera.Constants.FlashMode.off
+                flashMode === Camera.Constants?.FlashMode.off
+                  ? Camera.Constants?.FlashMode.on
+                  : Camera.Constants?.FlashMode.off
               );
             }}
           >
             <Ionicons
               name={
-                flashMode === Camera.Constants.FlashMode.on
+                flashMode === Camera.Constants?.FlashMode.on
                   ? "flash"
                   : "flash-off-sharp"
               }
@@ -164,9 +164,9 @@ const CameraModule = ({
           <TouchableOpacity
             onPress={() =>
               setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
+                type === Camera.Constants.Type?.back
+                  ? Camera.Constants.Type?.front
+                  : Camera.Constants.Type?.back
               )
             }
           >

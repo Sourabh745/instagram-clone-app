@@ -10,7 +10,7 @@ const useHandleUnfollow = ({currentUser, user}) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             following: firebase.firestore.FieldValue.arrayRemove(user.email),
           });
@@ -19,7 +19,7 @@ const useHandleUnfollow = ({currentUser, user}) => {
           .collection("users")
           .doc(user.email)
           .update({
-            followers: firebase.firestore.FieldValue.arrayRemove(currentUser.email),
+            followers: firebase.firestore.FieldValue.arrayRemove(currentUser?.email),
           });
           
       } catch (error) {

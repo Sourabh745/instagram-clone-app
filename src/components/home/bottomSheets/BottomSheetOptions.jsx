@@ -55,13 +55,13 @@ const BottomSheetOptions = ({
   };
 
   const handleAboutAccount = () => {
-    if (currentUser.email === post.owner_email) {
+    if (currentUser?.email === post?.owner_email) {
       bottomSheetRef.current.close();
       navigation.navigate("Profile");
     } else {
       bottomSheetRef.current.close();
       navigation.navigate("UserDetail", {
-        email: post.owner_email,
+        email: post?.owner_email,
       });
     }
   };
@@ -87,8 +87,8 @@ const BottomSheetOptions = ({
             style={styles.opacityContainer}
           >
             <View style={styles.buttonContainer}>
-              {currentUser.saved_posts &&
-              currentUser.saved_posts.includes(post.id) ? (
+              {currentUser?.saved_posts &&
+              currentUser?.saved_posts.includes(post?.id) ? (
                 <Ionicons name="bookmark" size={24} color="#fff" />
               ) : (
                 <Feather name="bookmark" size={24} color="#fff" />
@@ -107,7 +107,7 @@ const BottomSheetOptions = ({
           </TouchableOpacity>
         </View>
 
-        {post.owner_email === currentUser.email && (
+        {post?.owner_email === currentUser?.email && (
           <View style={styles.verticalGroup}>
             <TouchableOpacity
               onPress={() => handleEditPost()}
@@ -130,7 +130,7 @@ const BottomSheetOptions = ({
             </TouchableOpacity>
           </View>
         )}
-        {post.owner_email !== currentUser.email && (
+        {post?.owner_email !== currentUser?.email && (
           <View style={styles.verticalGroup}>
             <TouchableOpacity
               onPress={() => handleAboutAccount()}

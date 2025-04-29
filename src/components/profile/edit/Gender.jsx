@@ -18,7 +18,7 @@ import firebase from "firebase/compat";
 const Gender = ({ navigation }) => {
   const { currentUser } = useUserContext();
   const [loader, setLoader] = useState(false);
-  const [values, setValues] = useState(currentUser.gender);
+  const [values, setValues] = useState(currentUser?.gender);
   const [isValid, setIsValid] = useState(false);
 
   genderOptions = ["Male", "Female", "Custom", "Prefer not to say"];
@@ -27,8 +27,8 @@ const Gender = ({ navigation }) => {
     if (values[0] === "Custom" && values[1] === "") {
       setIsValid(false);
     } else if (
-      values[0] === currentUser.gender[0] &&
-      values[1] === currentUser.gender[1]
+      values[0] === currentUser?.gender[0] &&
+      values[1] === currentUser?.gender[1]
     ) {
       setIsValid(false);
     } else {
@@ -43,7 +43,7 @@ const Gender = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             gender: [values[0], values[1]],
           });

@@ -21,10 +21,10 @@ const Bio = ({ navigation }) => {
   const [counter, setCounter] = useState(150);
   const [loader, setLoader] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const [values, setValues] = useState(currentUser.bio);
+  const [values, setValues] = useState(currentUser?.bio);
 
   useEffect(() => {
-    values === currentUser.bio ? setIsValid(false) : setIsValid(true);
+    values === currentUser?.bio ? setIsValid(false) : setIsValid(true);
     setCounter(150 - values.length);
   }, [values]);
 
@@ -35,7 +35,7 @@ const Bio = ({ navigation }) => {
         await firebase
           .firestore()
           .collection("users")
-          .doc(currentUser.email)
+          .doc(currentUser?.email)
           .update({
             bio: values,
           });

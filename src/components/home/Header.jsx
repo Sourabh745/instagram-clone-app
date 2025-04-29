@@ -24,7 +24,7 @@ const Header = ({ navigation, headerOpacity, currentUser }) => {
   const [notificationModal, setNotificationModal] = useState(false);
 
   useEffect(() => {
-    if (currentUser.event_notification > 0) {
+    if (currentUser?.event_notification > 0) {
       setNotificationModal(true);
 
       setTimeout(() => {
@@ -61,7 +61,7 @@ const Header = ({ navigation, headerOpacity, currentUser }) => {
               });
             }}
           >
-            {currentUser && currentUser.event_notification > 0 && (
+            {currentUser && currentUser?.event_notification > 0 && (
               <View style={styles.unreadBadgeSmallContainer} />
             )}
             <View style={styles.iconsContainer}>
@@ -73,10 +73,10 @@ const Header = ({ navigation, headerOpacity, currentUser }) => {
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
-            {currentUser && currentUser.chat_notification > 0 && (
+            {currentUser && currentUser?.chat_notification > 0 && (
               <View style={styles.unreadBadgeContainer}>
                 <Text style={styles.unreadBadgeText}>
-                  {currentUser.chat_notification}
+                  {currentUser?.chat_notification}
                 </Text>
               </View>
             )}
@@ -126,7 +126,7 @@ const Header = ({ navigation, headerOpacity, currentUser }) => {
       {notificationModal && (
         <ModalNotification
           setNotificationModal={setNotificationModal}
-          notificationCounter={currentUser.event_notification}
+          notificationCounter={currentUser?.event_notification}
         />
       )}
     </Animated.View>

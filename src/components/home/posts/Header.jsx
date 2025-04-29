@@ -23,11 +23,11 @@ const Header = ({ navigation, post, currentUser }) => {
   };
 
   const handlePostOwner = () => {
-    if (currentUser.email === post.owner_email) {
+    if (currentUser?.email === post?.owner_email) {
       navigation.navigate("Profile");
     } else {
       navigation.navigate("UserDetail", {
-        email: post.owner_email,
+        email: post?.owner_email,
       });
     }
   };
@@ -39,10 +39,10 @@ const Header = ({ navigation, post, currentUser }) => {
           onPress={() => handlePostOwner()}
           style={styles.headerUserContainer}
         >
-          {checkStoriesSeen(post.username, currentUser.email) ? (
+          {checkStoriesSeen(post?.username, currentUser?.email) ? (
             <View style={styles.rainbowBorder}>
               <Image
-                source={{ uri: post.profile_picture }}
+                source={{ uri: post?.profile_picture }}
                 style={styles.headerImage}
               />
             </View>
@@ -54,25 +54,25 @@ const Header = ({ navigation, post, currentUser }) => {
               style={styles.rainbowBorder}
             >
               <Image
-                source={{ uri: post.profile_picture }}
+                source={{ uri: post?.profile_picture }}
                 style={styles.headerImageWithRainbow}
               />
             </LinearGradient>
           )}
-          <Text style={styles.headerText}>{post.username.toLowerCase()}</Text>
+          <Text style={styles.headerText}>{post?.username.toLowerCase()}</Text>
         </TouchableOpacity>
         <View style={styles.rowContainer}>
-          {currentUser.email !== post.owner_email &&
-          currentUser.following &&
-          !currentUser.following.includes(post.owner_email) ? (
+          {currentUser?.email !== post?.owner_email &&
+          currentUser?.following &&
+          !currentUser?.following.includes(post?.owner_email) ? (
             <TouchableOpacity
               onPress={() => {
-                handleFollow(post.owner_email);
+                handleFollow(post?.owner_email);
               }}
               style={styles.buttonContainer}
             >
-              {currentUser.following_request &&
-              !currentUser.following_request.includes(post.owner_email) ? (
+              {currentUser?.following_request &&
+              !currentUser?.following_request.includes(post?.owner_email) ? (
                 <Text style={styles.buttonText}>Follow</Text>
               ) : (
                 <Text style={styles.buttonText}>Requested</Text>

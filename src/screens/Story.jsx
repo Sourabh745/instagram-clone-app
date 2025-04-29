@@ -36,7 +36,7 @@ const Story = ({ navigation, route }) => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [isLiked, setIsLiked] = useState({
     [currentStoryIndex]: !!stories[currentStoryIndex].likes_by_users.includes(
-      currentUser.email
+      currentUser?.email
     ),
   });
   const user = {
@@ -76,7 +76,7 @@ const Story = ({ navigation, route }) => {
 
   const handleViewProfile = () => {
     handlePause();
-    if (stories[currentStoryIndex].owner_email === currentUser.email) {
+    if (stories[currentStoryIndex].owner_email === currentUser?.email) {
       navigation.navigate("Profile");
     } else {
       navigation.navigate("UserDetail", {
@@ -134,7 +134,7 @@ const Story = ({ navigation, route }) => {
                 />
 
                 <Text style={styles.usernameText}>
-                  {stories[0].username === currentUser.username
+                  {stories[0].username === currentUser?.username
                     ? "Your story"
                     : stories[0].username}
                 </Text>
@@ -153,7 +153,7 @@ const Story = ({ navigation, route }) => {
             </View>
           </View>
 
-          {stories[currentStoryIndex].owner_email !== currentUser.email ? (
+          {stories[currentStoryIndex].owner_email !== currentUser?.email ? (
             <View style={styles.inputContainer}>
               <View style={styles.inputWrapper}>
                 <TextInput

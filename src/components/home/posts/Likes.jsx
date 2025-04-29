@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const Likes = ({ post, navigation }) => (
+const Likes = ({ post, navigation, localLiked }) => (
   <View>
-    {post.likes_by_users.length < 1 ? null : post.likes_by_users.length == 1 ? (
+    {post?.likes_by_users?.length < 1 ? null : post?.likes_by_users?.length == 1 ? (
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Likes", {
-            likesByEmail: post.likes_by_users,
+            likesByEmail: post?.likes_by_users,
           })
         }
       >
@@ -16,13 +16,14 @@ const Likes = ({ post, navigation }) => (
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("Likes", {
-            likesByEmail: post.likes_by_users,
+            likesByEmail: post?.likes_by_users,
           })
         }
       >
         <Text style={styles.likesText}>
           <Text style={styles.likesText}>
-            {post.likes_by_users.length.toLocaleString("es-ar")} likes
+            {/* {post?.likes_by_users.length.toLocaleString("es-ar")} likes */}
+            {localLiked} likes
           </Text>
         </Text>
       </TouchableOpacity>

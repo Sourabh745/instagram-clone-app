@@ -7,7 +7,7 @@ const useReportAction = () => {
     const reportPost = (post, currentUser) => {
         try {
             firebase.firestore().collection("reports").add({
-                ...post, reported_by: currentUser.email
+                ...post, reported_by: currentUser?.email
             });
             Alert.alert("Thanks for reporting this", "We'll review the ad to determine whether it violates our Ad policies. Thanks for helping us keep Instagram safe.");
         } catch (error) {
@@ -18,7 +18,7 @@ const useReportAction = () => {
     const reportUser = (user, currentUser) => {
         try {
             firebase.firestore().collection("reports").add({
-                user, reported_by: currentUser.email
+                user, reported_by: currentUser?.email
             });
             Alert.alert("Thanks for reporting this", "We'll review the ad to determine whether it violates our Ad policies. Thanks for helping us keep Instagram safe.");
         } catch (error) {

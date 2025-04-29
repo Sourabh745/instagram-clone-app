@@ -15,7 +15,7 @@ import firebase from "firebase/compat";
 import { getLocales } from "expo-localization";
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 
-const SignupForm = ({ navigation }) => {
+const SignupForm = ({ navigation, setLoading }) => {
   const [userOnFocus, setUserOnFocus] = useState(false);
   const [emailOnFocus, setEmailOnFocus] = useState(false);
   const [emailToValidate, SetEmailToValidate] = useState(false);
@@ -56,18 +56,24 @@ const SignupForm = ({ navigation }) => {
   };
 
   const onSignup = async (email, username, password) => {
+    setLoading(true); // loading
     try {
+      setLoading(true); // loading
       const userCredentials = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password);
+        setLoading(false); // loading
+
+
+        setTimeout(async()=>{
       await firebase
         .firestore()
         .collection("users")
-        .doc(userCredentials.user.email)
+        .doc(userCredentials?.user?.email)
         .set({
-          owner_uid: userCredentials.user.uid,
+          owner_uid: userCredentials?.user?.uid,
           username: username,
-          email: userCredentials.user.email,
+          email: userCredentials?.user?.email,
           profile_picture: await getRandomProfilePicture(),
           name: username,
           bio: "",
@@ -87,12 +93,20 @@ const SignupForm = ({ navigation }) => {
           country: country,
         });
 
+      }, 1000)
+
       console.log(
         "🔥 Firebase User Created Successful ✅",
         userCredentials.user.email
       );
     } catch (error) {
-      console.log(error.message);
+      setLoading(false);
+      if (error.code === "auth/email-already-in-use") {
+        console.log("This email is already registered.");
+        alert("This email is already registered.")
+      } else {
+        console.log(error.message);
+      }
     }
   };
 
@@ -132,7 +146,7 @@ const SignupForm = ({ navigation }) => {
                 onBlur={() => {
                   handleBlur("email");
                   setEmailOnFocus(false);
-                  values.email.length > 0
+                  values.email?.length > 0
                     ? SetEmailToValidate(true)
                     : SetEmailToValidate(false);
                 }}
@@ -154,7 +168,7 @@ const SignupForm = ({ navigation }) => {
                 {
                   paddingVertical: 16,
                   borderColor:
-                    userToValidate && values.username.length < 6
+                    userToValidate && values.username?.length < 6
                       ? "#f00"
                       : "#444",
                 },
@@ -171,7 +185,7 @@ const SignupForm = ({ navigation }) => {
                 onBlur={() => {
                   handleBlur("username");
                   setUserOnFocus(false);
-                  values.username.length > 0
+                  values.username?.length > 0
                     ? setUserToValidate(true)
                     : setUserToValidate(false);
                 }}
@@ -192,7 +206,7 @@ const SignupForm = ({ navigation }) => {
                 styles.inputField,
                 {
                   borderColor:
-                    passwordToValidate && values.password.length < 5
+                    passwordToValidate && values.password?.length < 6
                       ? "#f00"
                       : "#444",
                 },
@@ -242,7 +256,7 @@ const SignupForm = ({ navigation }) => {
                 >
                   <Ionicons name={"logo-react"} size={24} color="#fff" />
                   <Text style={styles.modalText}>
-                    Developed by Hernan Hawryluk
+                    Developed by Redsky Advance Solutions Pvt. Ltd.
                   </Text>
                 </Animated.View>
               )}

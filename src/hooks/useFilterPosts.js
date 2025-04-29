@@ -19,7 +19,7 @@ const useFilterPosts = (filterKey) => {
                 .orderBy("createdAt", "desc")
                 .limit(loadLimit)
                 .onSnapshot(snapshot => {
-                    const updatedPosts = snapshot.docs.map(post => ({ id: post.id, ...post.data() }));
+                    const updatedPosts = snapshot.docs.map(post => ({ id: post?.id, ...post?.data() }));
                     setFilteredPosts(updatedPosts);
                 });
 

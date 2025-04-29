@@ -45,9 +45,9 @@ const Chat = ({ navigation }) => {
   useEffect(() => {
     beginSearch();
 
-    if (currentUser.chat_notification > 0) {
+    if (currentUser?.chat_notification > 0) {
       try {
-        firebase.firestore().collection("users").doc(currentUser.email).update({
+        firebase.firestore().collection("users").doc(currentUser?.email).update({
           chat_notification: 0,
         });
       } catch (error) {
@@ -84,7 +84,7 @@ const Chat = ({ navigation }) => {
           style={styles.rowContainer}
         >
           <MaterialIcons name="arrow-back-ios" size={26} color={"#fff"} />
-          <Text style={styles.textTitle}>{currentUser.username}</Text>
+          <Text style={styles.textTitle}>{currentUser?.username}</Text>
         </TouchableOpacity>
       </View>
 

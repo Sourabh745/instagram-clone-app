@@ -5,7 +5,7 @@ node_modules/
 ios
 
 # Expo
-.expo/
+# .expo/
 dist/
 web-build/
 

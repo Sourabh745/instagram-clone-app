@@ -12,16 +12,16 @@ const useHandleFollow = () => {
                 .collection("users")
                 .doc(userEmail)
                 .update({
-                  followers_request: !currentUser.following_request.includes(userEmail)
-                    ? firebase.firestore.FieldValue.arrayUnion(currentUser.email)
-                    : firebase.firestore.FieldValue.arrayRemove(currentUser.email),
+                  followers_request: !currentUser?.following_request.includes(userEmail)
+                    ? firebase.firestore.FieldValue.arrayUnion(currentUser?.email)
+                    : firebase.firestore.FieldValue.arrayRemove(currentUser?.email),
                 });
             await firebase
                 .firestore()
                 .collection("users")
-                .doc(currentUser.email)
+                .doc(currentUser?.email)
                 .update({
-                  following_request: !currentUser.following_request.includes(userEmail)
+                  following_request: !currentUser?.following_request.includes(userEmail)
                     ? firebase.firestore.FieldValue.arrayUnion(userEmail)
                     : firebase.firestore.FieldValue.arrayRemove(userEmail),
                 });

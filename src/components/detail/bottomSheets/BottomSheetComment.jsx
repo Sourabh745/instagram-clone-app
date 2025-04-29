@@ -128,7 +128,7 @@ const BottomSheetComment = ({ bottomSheetRefComment, currentUser, post }) => {
           <View style={styles.writingContainer}>
             <Image
               source={{
-                uri: currentUser.profile_picture,
+                uri: currentUser?.profile_picture,
               }}
               style={styles.profilePicture}
             />
