@@ -7,10 +7,15 @@ import { GestureDetector } from "react-native-gesture-handler";
 import useLikeAnimation from "../../utils/useLikeAnimation";
 import { Ionicons } from "@expo/vector-icons";
 
-const PostImage = ({ post, currentUser }) => {
+const PostImage = ({ post, currentUser, setLocalLiked ,isLiked, setIsLiked, setDoubleTapStatus, doubleTapStatus}) => {
   const { handleDoubleTap, animatedStyles } = useLikeAnimation(
     post,
-    currentUser
+    currentUser,
+    setLocalLiked,
+    setIsLiked,
+    isLiked,
+    setDoubleTapStatus,
+    doubleTapStatus
   );
 
   return (

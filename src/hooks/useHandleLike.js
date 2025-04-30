@@ -13,6 +13,7 @@ const useHandleLike = () => {
             setLocalLiked((prev) => isLiked ? prev - 1 : prev + 1);
             setIsLiked((prev) => !prev); 
             setDoubleTapStatus(!isLiked);
+            
             const newLikeStatus = !isLiked;
             
             try {

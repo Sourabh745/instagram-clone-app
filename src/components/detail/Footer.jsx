@@ -11,6 +11,13 @@ const Footer = ({
   bottomSheetRef,
   setBottomSheetIndex,
   sharedIndex,
+  navigation, 
+  setLocalLiked, 
+  localLiked ,
+  isLiked, 
+  setIsLiked, 
+  setDoubleTapStatus, 
+  doubleTapStatus
 }) => {
   const { handlePostLike } = useHandleLike();
   const { sharePost } = useSharePost();
@@ -32,23 +39,24 @@ const Footer = ({
   return (
     <View style={styles.footerIconsContainer}>
       <View style={styles.footerIcons}>
-        <TouchableOpacity onPress={() => handlePostLike(post, currentUser)}>
-          {post?.likes_by_users.includes(currentUser?.email) ? (
-            <MaterialCommunityIcons
-              name="cards-heart"
-              size={27}
-              color={"#f00"}
-              style={styles.heartIcon}
-            />
-          ) : (
-            <MaterialCommunityIcons
-              name="cards-heart-outline"
-              size={27}
-              color={"#fff"}
-              style={styles.heartIcon}
-            />
-          )}
-        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {handlePostLike(post, currentUser, setLocalLiked, setIsLiked, isLiked, setDoubleTapStatus)}}>
+                 { isLiked ? (
+                 // {post?.likes_by_users.includes(currentUser?.email) ? (
+                   <MaterialCommunityIcons
+                     name="cards-heart"
+                     size={27}
+                     color={"#f33"}
+                     style={styles.heartIcon}
+                   />
+                 ) : (
+                   <MaterialCommunityIcons
+                     name="cards-heart-outline"
+                     size={27}
+                     color={"#fff"}
+                     style={styles.heartIcon}
+                   />
+                 )}
+               </TouchableOpacity>
         <TouchableOpacity onPress={() => handleCommentsSection()}>
           <MaterialCommunityIcons
             name="chat-outline"

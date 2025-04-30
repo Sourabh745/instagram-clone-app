@@ -27,6 +27,11 @@ const RenderItem = ({
     setLayoutHeight(height);
   };
 
+  const [localLiked, setLocalLiked] = useState(post?.likes_by_users?.length || 0);
+  const [isLiked, setIsLiked] = useState(post?.likes_by_users?.includes(currentUser?.email));
+  const [doubleTapStatus, setDoubleTapStatus] = useState(isLiked);
+  
+
   //===========================================
 
   return (
@@ -52,17 +57,26 @@ const RenderItem = ({
           sharedTransitionTag={post?.id.toString()}
         />
       )}
-      <PostImage post={post} currentUser={currentUser} />
+      <PostImage post={post} currentUser={currentUser} setLocalLiked={setLocalLiked} 
+      isLiked={isLiked} 
+      setIsLiked={setIsLiked} 
+      setDoubleTapStatus={setDoubleTapStatus} 
+      doubleTapStatus={doubleTapStatus} />
+      
       <Footer
         post={post}
         currentUser={currentUser}
         bottomSheetRef={bottomSheetRefComments}
         setBottomSheetIndex={setBottomSheetIndex}
         sharedIndex={sharedIndex}
-        
+        localLiked={localLiked} 
+        setLocalLiked={setLocalLiked} 
+        isLiked={isLiked} 
+        setIsLiked={setIsLiked} 
+        setDoubleTapStatus={setDoubleTapStatus} doubleTapStatus={doubleTapStatus}
       />
 
-      <Likes post={post} navigation={navigation}  />
+      <Likes post={post} navigation={navigation} localLiked={localLiked}  />
 
       <Caption post={post} />
       <Comments

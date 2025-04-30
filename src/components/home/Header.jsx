@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 20,
     zIndex: 1,
+    backgroundColor: "#000",/// newly added
   },
   instagramContainer: {
     flexDirection: "row",

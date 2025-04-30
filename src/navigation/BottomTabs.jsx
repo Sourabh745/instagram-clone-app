@@ -14,6 +14,9 @@ import {
   Octicons,
   FontAwesome,
 } from "@expo/vector-icons";
+import HomeStack from "./HomeStack";
+import SearchStack from "./SearchStack";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -38,8 +41,8 @@ const BottomTabs = ({ navigation }) => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeTab"
+        component={HomeStack}
         options={{
           tabBarIcon: ({ focused }) => {
             return focused ? (
@@ -51,8 +54,8 @@ const BottomTabs = ({ navigation }) => {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
+        name="SearchTab"
+        component={SearchStack}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

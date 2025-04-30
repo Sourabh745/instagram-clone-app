@@ -12,13 +12,9 @@ import Date from "./posts/Date";
 const Posts = ({ navigation, post, currentUser, key }) => {
 
   const [localLiked, setLocalLiked] = useState(post?.likes_by_users.length || 0);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(post?.likes_by_users.includes(currentUser?.email));//false
   const [doubleTapStatus, setDoubleTapStatus] = useState(isLiked);
 
-  useEffect(()=>{
-    // alert("POSTDATA::::"+ item);
-    // alert("POSTcurrentUser::::"+ currentUser);
-  },[])
 
   return (
     <View key={key} style={{ marginTop: 10 }}>

@@ -21,8 +21,8 @@ const useFetchUserPosts = (email) => {
                 .limit(loadLimit)
                 .onSnapshot(snapshot => {
                     const data = snapshot.docs.map(post => ({ id: post?.id, ...post?.data() }));
-                    if (data.length <= 0) {
-                        setPosts([{id: "empty"}]);
+                    if (data.length === 0) { //  show Number of posts  0 if no posts
+                        setPosts([]);
                     } else {
                         setPosts(data);
                     }
@@ -38,7 +38,7 @@ const useFetchUserPosts = (email) => {
                 setLoader(false);
             }
         }
-    }, [loadLimit]);
+    }, [loadLimit, email]);//added email to the dependency array
 
     const fetchOlderPosts = async () => {
         setLoadLimit(loadLimit + 10);

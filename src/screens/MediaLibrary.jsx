@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
   selectorContainer: {
     position: "absolute",
     bottom: 35,
-    right: 15,
+    right: 59,
     height: 48,
     width: 240,
     borderRadius: 30,
